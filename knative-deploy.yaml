@@ -1,0 +1,17 @@
+# Create Service - describes an application on Knative
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  # Makes up part of the route is not specified
+  name: "meetup-yaml"
+spec:
+  runLatest:
+    # Configuration
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: "eu.gcr.io/big-rob/glasgow:initial"
+            # env:
+            #   - name: "TARGET"
+            #     value: "Glasgow Devops"
