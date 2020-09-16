@@ -18,11 +18,6 @@ You will need a few things installed or setup before startng;
 
 ## Cloud Run
 
-https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale
-https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale
-https://cloud.google.com/kubernetes-engine/docs/how-to/scaling-apps#autoscaling-deployments
-
-
 # Demo
 
 ## Intial Container image [OPTIONAL]
@@ -76,7 +71,7 @@ This is all great but how do I see what is running?
 Lets see it running
 
 ```bash
-kn -h
+kn -h (highlight create, update, revisions)
 kn service describe meetup
 kn route describe meetup
 kn revision list
@@ -111,6 +106,10 @@ As mentioned a couple of other methods exist to deploy;
 * Terraform - `terrafrom apply`
 
 Now lets look at this form the console ....
+* YAML
+* Revisions
+* Metrics
+* ..
 
 
 <!-- ```
@@ -165,6 +164,10 @@ gcloud beta run services update-traffic meetup --to-tags green=30
 #Actually maybe we want to baance the traffic and see which has the best impact?
 # splitting Traffic (probably exclude this one)
 gcloud run services update-traffic meetup --to-revisions <LIST>
+#OR
+ kn service update meetup \
+ --traffic hello-example-bqbbr-2=50 \
+ --traffic hello-example-nfwgx-3=50
 ```
 
 ```bash
@@ -186,6 +189,7 @@ Show console and ability to change
 
 Let show how this could be integrated with CI/CD pipelines.
 I would prefer to have this automatically deployed, change something and commit to watch the pipeline kick-off
+Show it in a Cloud Build page and the output
 
 
 ## Telemetry/Log & Monitor
