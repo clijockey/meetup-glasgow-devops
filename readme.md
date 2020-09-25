@@ -153,21 +153,21 @@ gcloud run deploy meetup --image eu.gcr.io/big-rob/glasgow:blue
 # gcloud beta run deploy --image eu.gcr.io/big-rob/glasgow:blue --no-traffic --tag blue
 ## browse to blue---<URL>
 gcloud beta run deploy meetup --image eu.gcr.io/big-rob/glasgow:green --no-traffic --tag green
-# now bring into service
-# gcloud beta run services update-traffic meetup --to-revisions blue=30
-gcloud beta run services update-traffic meetup --to-tags green=30
+# now bring into service gradually
+gcloud beta run services update-traffic meetup --to-tags green=20
+gcloud beta run services update-traffic meetup --to-tags green=40
+gcloud beta run services update-traffic meetup --to-tags green=100
 ```
 
 
 ```bash
-
 #Actually maybe we want to baance the traffic and see which has the best impact?
 # splitting Traffic (probably exclude this one)
 gcloud run services update-traffic meetup --to-revisions <LIST>
 #OR
  kn service update meetup \
- --traffic hello-example-bqbbr-2=50 \
- --traffic hello-example-nfwgx-3=50
+ --traffic <revision1>=50 \
+ --traffic <revision2>=50
 ```
 
 ```bash
@@ -177,10 +177,8 @@ gcloud run services update-traffic meetup --to-latest
 
 ```bash
 # Rollback
-gcloud run services update-traffic SERVICE --to-revisions REVISION=100
+gcloud run services update-traffic meetup --to-revisions <revision>=100
 ```
-
-`gcloud beta run services update-traffic myservice --to-tags TAG_NAME=TRAFFIC_PERCENT`
 
 Show console and ability to change
 
